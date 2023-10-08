@@ -1,70 +1,35 @@
+# app.py
 
-
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import joblib
-import pandas as pd
-from scipy.sparse import hstack
+from fastapi import FastAPI, File, UploadFile
+from model_utils import predict_on_new_data
 
 app = FastAPI()
 
-# Load saved models and preprocessors
-rf_classifier = joblib.load('models/random_forest_model.pkl')
-tfidf_vectorizer = joblib.load('models/tfidf_vectorizer.pkl')
-label_encoder = joblib.load('models/label_encoder.pkl')
-
-class NFTMetadata(BaseModel):
-    success: bool
-    message: str
-    result: dict
-
 @app.post("/predict/")
-async def predict_nft_authenticity(metadata: NFTMetadata):
+async def predict(json_file: UploadFile):
     try:
-        # Extract 'result' object and create DataFrame
-        data = metadata.result
-        df = pd.DataFrame([data])
+        # Read the JSON data from the uploaded file
+        data = json_file.file.read()
+        
+        # Parse the JSON data into a Python dictionary
+        json_data = json.loads(data)
 
-        # Fill missing fields with default values
-        default_values = {
-            'name': 'Unknown',
-            'description': 'Unknown',
-            'royalty': 0,
-            'symbol': 'Unknown',
-            'primary_sale_happened': False,
-            'owner': 'Unknown'
-        }
-        for field, default in default_values.items():
-            df[field] = df.get(field, default)
+        binary_results, confidence_scores = predict_on_new_data(json_data)
 
-        # Preprocess the data
-        name_tfidf = tfidf_vectorizer.transform(df['name'])
-        description_tfidf = tfidf_vectorizer.transform(df['description'])
+        results = []
 
-        try:
-            symbol_encoded = label_encoder.transform(df['symbol'])
-            primary_sale_happened_encoded = label_encoder.transform(df['primary_sale_happened'])
-            owner_encoded = label_encoder.transform(df['owner'])
-        except Exception as e:
-            if "unseen labels" in str(e):
-                raise HTTPException(status_code=400, detail="Unseen labels encountered. Please update the model.")
-            raise e
+        for idx, (binary_result, confidence) in enumerate(zip(binary_results, confidence_scores)):
+            prediction = 'Authentic' if binary_result[0] == 1 else 'spam'
+            confidence_score = confidence[0]
 
-        # Combine all features
-        X = hstack([
-            name_tfidf,
-            description_tfidf,
-            df[['royalty']].values,
-            symbol_encoded.reshape(-1, 1),
-            primary_sale_happened_encoded.reshape(-1, 1),
-            owner_encoded.reshape(-1, 1)
-        ])
+            result = {
+                "Index": idx,
+                "Predicted Label": prediction,
+                "Model Confidence": confidence_score
+            }
 
-        # Get the probability estimates
-        probability = rf_classifier.predict_proba(X)
-        authentic_probability = probability[0][1]
+            results.append(result)
 
-        return {"likelihood_score": authentic_probability}
-
+        return results
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        return {"error": str(e)}
