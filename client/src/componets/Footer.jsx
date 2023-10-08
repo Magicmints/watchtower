@@ -2,7 +2,8 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer class="bg-primary text-center py-4 text-white">© 2023 WatchTower. All rights reserved.</footer>
+
   )
 }
 
