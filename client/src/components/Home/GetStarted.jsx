@@ -1,6 +1,6 @@
-import styles from "../style";
+import styles from "../../style";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { arrowUp } from "../assets";
+import { arrowUp } from "../../assets";
 
 const GetStarted = () => (
 

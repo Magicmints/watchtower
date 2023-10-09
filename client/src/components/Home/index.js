@@ -5,9 +5,9 @@ import Footer from './Footer';
 import GetStarted from './GetStarted';
 import Working from './Working';
 import Hero from './Hero';
-import Zk from './Zk';
+import Zk from './Notify';
 
-export{
+export {
     NavBar,
     Button,
     Feedback,
@@ -15,7 +15,7 @@ export{
     GetStarted,
     Working,
     Hero,
-    Zk 
+    Zk
 };
 
 

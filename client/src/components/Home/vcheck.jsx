@@ -1,9 +1,9 @@
-import { card } from "../assets";
-import styles, { layout } from "../style";
+import { card } from "../../assets";
+import styles, { layout } from "../../style";
 import Button from "./Button";
-const Ipfs = () => {
+const Vcheck = () => {
   return (
-    <section id="ipfs" className={layout.section} >
+    <section id="Vcheck" className={layout.section} >
       <div className={layout.sectionInfo}>
         <h2 className={styles.heading2}>
           Coming Soon! <br className="sm:block hidden" /> The Watch Tower Verified Check 🌟
@@ -29,4 +29,4 @@ const Ipfs = () => {
   )
 }
 
-export default Ipfs
+export default Vcheck

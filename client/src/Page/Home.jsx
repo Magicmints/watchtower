@@ -1,7 +1,7 @@
 import React from 'react'
-import { NavBar, Feedback, Footer, Working, Hero, Zk } from '../componets';
+import { NavBar, Feedback, Footer, Working, Hero, Zk } from '../components/Home';
 import styles from '../style';
-import Ipfs from '../componets/Ipfs';
+import Vcheck from '../components/Home/vcheck';
 import { BrowserRouter as Router, Routes, Route, NavLink, BrowserRouter } from 'react-router-dom';
 const Home = () => {
   return (
@@ -12,7 +12,7 @@ const Home = () => {
         <Working />
         {/* <Feedback /> */}
         <Zk />
-        <Ipfs />
+        <Vcheck />
         <Footer />
       </div>
     </div>

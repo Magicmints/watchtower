@@ -1,5 +1,5 @@
-import styles from "../style";
-import { discount, robot, arrowUp } from "../assets";
+import styles from "../../style";
+import { discount, robot, arrowUp } from "../../assets";
 import GetStarted from "./GetStarted";
 
 const Hero = () => {

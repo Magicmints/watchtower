@@ -2,9 +2,9 @@ import { useState } from 'react';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import { close, logo, menu } from '../assets';
-import { navLinks } from '../constant';
-import styles from '../style';
+import { close, logo, menu } from '../../assets';
+import { navLinks } from '../../constant';
+import styles from '../../style';
 
 const activeClassName = 'active';
 
