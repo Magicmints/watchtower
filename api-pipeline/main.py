@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI, File, UploadFile
 from model_utils import predict_on_new_data
-
+import json
 app = FastAPI()
 
 @app.post("/predict/")
@@ -20,7 +20,7 @@ async def predict(json_file: UploadFile):
 
         for idx, (binary_result, confidence) in enumerate(zip(binary_results, confidence_scores)):
             prediction = 'Authentic' if binary_result[0] == 1 else 'spam'
-            confidence_score = confidence[0]
+            confidence_score = float(confidence[0])
 
             result = {
                 "Index": idx,

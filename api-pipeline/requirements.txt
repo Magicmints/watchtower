@@ -1,0 +1,8 @@
+pandas
+transformers
+torch 
+tensorflow 
+seaborn 
+scikit-learn
+fastapi
+uvicorn
