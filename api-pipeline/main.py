@@ -33,3 +33,7 @@ async def predict(json_file: UploadFile):
         return results
     except Exception as e:
         return {"error": str(e)}
+
+
+
+

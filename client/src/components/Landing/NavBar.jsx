@@ -6,7 +6,7 @@ import { close, logo, menu } from '../../assets';
 import { navLinks } from '../../constant';
 import styles from '../../style';
 
-const activeClassName = 'active';
+const activeclassname = 'active';
 
 const NavBar = () => {
   const [active, setActive] = useState('Home');
@@ -23,22 +23,22 @@ const NavBar = () => {
         <ul className="list-none sm:flex hidden justify-end items-center flex-1 space-x-10 font-poppins font-normal cursor-pointer text-[16px] text-white : text-dimWhite">
 
           <li className=' text-white'>
-            <NavLink to='/' activeClassName={activeClassName}>
+            <NavLink to='/' activeclassname={activeclassname}>
               Home
             </NavLink>
           </li>
           <li>
-            <HashLink to='#features' activeClassName={activeClassName}>
+            <HashLink to='#features' activeclassname={activeclassname}>
               Features
             </HashLink>
           </li>
           <li>
-            <HashLink to='#Working' activeClassName={activeClassName}>
+            <HashLink to='#Working' activeclassname={activeclassname}>
               Working
             </HashLink>
           </li>
           <li>
-            <NavLink to='/dashboard' activeClassName={activeClassName}>
+            <NavLink to='/dashboard' activeclassname={activeclassname}>
               Open App
             </NavLink>
           </li>

@@ -1,17 +1,24 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import DashboardMain from './Page/DashboardMain';
+import WalletComponent from './components/DashboardApp/WalletComponent'
 import Home from './Page/Home';
+import WalletContextProvider from './Context/WalletContextProvider'
+import Dashboard from './Page/Dashboard'
+
 
 const App = () => {
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path='/' element={<Home />} />
-        <Route path='/Dashboard' element={<DashboardMain />} />
-        <Route path='/Upload' element={<DashboardMain />} />
-      </Routes>
-    </BrowserRouter>
+
+    <WalletContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path='/' element={<Home />} />
+          <Route path='/Dashboard' element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
+    </WalletContextProvider>
+
   );
 };
 

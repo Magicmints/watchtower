@@ -4,6 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.wallet-adapter-button {
+  background-color: #1a202c;
+  color: #fff;
+  border: 1px solid #1a202c;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
+    color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
 :root {
   --black-gradient: linear-gradient(
     144.39deg,
@@ -17,6 +30,13 @@
 * {
   scroll-behavior: smooth;
 }
+
+.wallet-adapter-button-trigger {
+  background-color: #512da8 !important;
+}
+
+
+
 
 .text-gradient {
   background: radial-gradient(

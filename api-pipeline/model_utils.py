@@ -43,3 +43,7 @@ def predict_on_new_data(input_json):
     predictions = trained_model.predict(reshaped_data)
     binary_predictions = (predictions > 0.5).astype(int)
     return binary_predictions, predictions
+
+
+
+
