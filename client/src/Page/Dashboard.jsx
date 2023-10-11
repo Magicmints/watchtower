@@ -209,7 +209,7 @@ const Dashboard = () => {
 
     const sendNftDataToApi = async (nftData) => {
         const preparedData = prepareNftDataForApi(nftData);
-        const apiUrl = 'http://44.214.174.192:8000/predict/';
+        const apiUrl = 'https://ue7qflb8vf.execute-api.us-east-1.amazonaws.com/predict';
 
         const response = await fetch(apiUrl, {
             method: 'POST',
