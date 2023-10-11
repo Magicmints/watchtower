@@ -137,26 +137,28 @@ async function fetchAllWalletNFTs(walletAddress, apiKey) {
 }
 
 // Usage in your React component
-async function fetchAndDisplayNFTs(wallet_address) {
+export async function fetchAndDisplayNFTs(wallet_address) {
     const walletAddress = wallet_address;
     const apiKey = 'VM6jV28HbK8gyBKL';
+    let transformedNFTList;
 
     try {
         const { nftList, elapsedTime } = await fetchAllWalletNFTs(walletAddress, apiKey);
         const transformedNFTList = transformNFTData(nftList); // Transform the data
 
         // Save the transformed data to a JSON file
-        writeFileSync('nftsamData.json', JSON.stringify(transformedNFTList, null, 2), 'utf-8');
-        console.log('All Wallet NFTs:', nftList);
-        console.log('Time taken to fetch data (ms):', elapsedTime);
+        localStorage.setItem(`${walletAddress}_nftData`, JSON.stringify(transformedNFTList));
+        // console.log('All Wallet NFTs:', nftList);
+        // console.log('Time taken to fetch data (ms):', elapsedTime);
         // Now you can use nftList to display or work with the combined NFT data in your React component.
     } catch (error) {
         console.error('Error fetching NFTs:', error);
     }
+
+    return transformedNFTList;
 }
 
-// Call the function to fetch and display NFTs
-fetchAndDisplayNFTs('FQuxesCpn3giUaxmwFr98ee9FVMSChUziyVKLYYrFKmW');
+
 
 
 

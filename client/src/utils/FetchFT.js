@@ -1,20 +1,20 @@
-import { writeFileSync } from 'fs';
+// import { writeFileSync } from 'fs';
 import { mapLimit } from 'async';
 
 // Define your API keys
 
-const apiKey = 'VM6jV28HbK8gyBKL';
+const apiKey = '';
 
 
 // Define the URLs for the API calls
 
 // Function to make API calls and save data to JSON
-async function fetchData(walletAddress) {
+export async function fetchData(walletAddress) {
 
     const walletTokensUrl = `https://api.shyft.to/sol/v1/wallet/all_tokens?network=mainnet-beta&wallet=${walletAddress}`;
     const tokenInfoUrl = `https://api.shyft.to/sol/v1/token/get_info?network=mainnet-beta`;
     const nftReadSelectedUrl = "https://api.shyft.to/sol/v1/nft/read_selected";
-
+    let modifiedResults = []
 
     try {
         // Make the first API call
@@ -26,7 +26,7 @@ async function fetchData(walletAddress) {
         });
 
         const walletTokensData = await response1.json();
-        console.log(walletTokensData)
+        // console.log(walletTokensData)
 
 
         // Extract mint addresses
@@ -34,7 +34,7 @@ async function fetchData(walletAddress) {
 
         for (let index = 0; index < mintAddresses.length; index++) {
             const element = mintAddresses[index];
-            console.log(element)
+            // console.log(element)
 
         }
         // Use async to get decimals for each mint address in parallel
@@ -46,7 +46,7 @@ async function fetchData(walletAddress) {
                 },
             });
             const tokenInfo = await response2.json();
-            console.log(tokenInfo); // Add this line to inspect the response
+            // console.log(tokenInfo); // Add this line to inspect the response
 
 
             return { address, decimals: tokenInfo.result.decimals };
@@ -114,8 +114,10 @@ async function fetchData(walletAddress) {
                         });
 
                         // Save the modified results to a JSON file
-                        writeFileSync('data.json', JSON.stringify(modifiedResults, null, 2));
-                        console.log('Data saved to data.json');
+                        // writeFileSync(`${walletAddress}_data_from_fetchft.json`, JSON.stringify(modifiedResults, null, 2));
+                        localStorage.setItem(`${walletAddress}_ftData`, JSON.stringify(modifiedResults));
+
+                        // console.log('Data saved to data.json');
                     }
                 });
             }
@@ -123,10 +125,12 @@ async function fetchData(walletAddress) {
     } catch (error) {
         console.error('Error:', error);
     }
+
+    return modifiedResults;
 }
 
-// Call the fetchData function to start the process
-fetchData('FQuxesCpn3giUaxmwFr98ee9FVMSChUziyVKLYYrFKmW');
+// // Call the fetchData function to start the process
+// fetchData('FQuxesCpn3giUaxmwFr98ee9FVMSChUziyVKLYYrFKmW');
 
 
 
