@@ -155,7 +155,7 @@ const Dashboard = () => {
             <NftLoader loading={loading} count={nftCount} />
             <WalletComponent onWalletAddressChange={handleWalletAddressChange} />
             {!loading && fetched && (
-                <div className="w-full max-w-6xl mt-4 p-4 rounded-lg shadow-md bg-white">
+                <div className="w-full max-w-7xl mt-4 p-4 rounded-lg shadow-md bg-white">
                     {nftData.length > 0 ? <Table nfts={nftData} /> : <p className="text-center text-xl text-gray-700">No NFTs found</p>}
                 </div>
             )}
