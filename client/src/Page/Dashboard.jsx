@@ -242,17 +242,22 @@ const Dashboard = () => {
             });
             setNftData(updatedNfts);
             setHasDataBeenSent(true);  // Mark data as sent
+            console.log("Calling sendNftDataToApi...");
+
         }
     };
 
 
     useEffect(() => {
+        console.log("Inside useEffect monitoring nftData");
         if (nftData.length > 0 && !hasDataBeenSent) {
             handleSendData();
         }
     }, [nftData]);
 
-    console.log(nftData[0])
+
+
+
     const fetchNFTData = async (endpoint, walletAddress, page = 1) => {
 
 
@@ -277,7 +282,7 @@ const Dashboard = () => {
 
     const handleWalletAddressChange = async (walletAddress) => {
         if (!walletAddress) return;
-
+        console.log("Fetching data for address:", walletAddress);
         let allNfts = [];
         let page = 1;
 
@@ -299,7 +304,9 @@ const Dashboard = () => {
             page++;
         }
         // Set the consolidated data to state
-        setNftData(allNfts);
+        setNftData(prevData => [...prevData, ...allNfts]);
+        console.log("NFT Data updated:", allNfts);
+
     };
 
     return (

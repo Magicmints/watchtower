@@ -14,6 +14,12 @@ const WalletComponent = ({ onWalletAddressChange }) => {
             onWalletAddressChange(connectedWalletAddress);
         }
     }, [publicKey]);
+
+    useEffect(() => {
+        if (walletAddress) {
+            onWalletAddressChange(walletAddress);
+        }
+    }, [walletAddress]);
     return (
 
         // <div className="min-h-screen flex items-center justify-center  bg-gray-gradient">
