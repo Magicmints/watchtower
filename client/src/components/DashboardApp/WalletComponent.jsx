@@ -36,9 +36,14 @@ const WalletComponent = ({ onWalletAddressChange }) => {
                 onChange={(e) => setWalletAddress(e.target.value)}
             />
             <p className="text-center mb-6 font-semibold text-2xl">OR</p>
-            <div className='flex items-center justify-center'>
-
+            <div className="flex items-center justify-center space-x-4"> {/* Add space-x-4 to add spacing between buttons */}
                 <WalletMultiButton />
+                <button
+                    onClick={() => window.location.reload()}
+                    className="btn btn-outline btn-primary"
+                >
+                    Reset
+                </button>
             </div>
         </div>
 
