@@ -5,10 +5,24 @@
 import React, { useState, useEffect } from 'react';
 import WalletComponent from '../components/DashboardApp/WalletComponent';
 import Table from '../components/DashboardApp/Table';
-
+import './m.css'
 const Dashboard = () => {
     const [nftData, setNftData] = useState([]);
     const [hasDataBeenSent, setHasDataBeenSent] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [nftCount, setNftCount] = useState(0);
+
+    function NftLoader({ loading, count }) {
+        if (!loading) return null;
+
+        return (
+            <div className="nft-loader">
+                <div className="text">Hold on! We're fetching your NFTs...</div>
+                <div className="count">{count} NFTs fetched</div>
+                <div className="spinner"></div>
+            </div>
+        );
+    }
 
 
     const prepareNftDataForApi = (nftData) => {
@@ -97,6 +111,7 @@ const Dashboard = () => {
 
     const handleWalletAddressChange = async (walletAddress) => {
         if (!walletAddress) return;
+        setLoading(true);
         console.log("Fetching data for address:", walletAddress);
         let allNfts = [];
         let page = 1;
@@ -107,6 +122,9 @@ const Dashboard = () => {
             const nftData = await fetchNFTData("https://api.shyft.to/sol/v2/nft/read_all", walletAddress, page);
             if (!nftData.success || nftData.result.nfts.length === 0) break;
             allNfts.push(...nftData.result.nfts);
+            // Update the NFT count here for standard NFTs
+            setNftCount(prevCount => prevCount + nftData.result.nfts.length);
+
             page++;
         }
         page = 1;  // Reset page counter for next API
@@ -116,21 +134,29 @@ const Dashboard = () => {
             const cNftData = await fetchNFTData("https://api.shyft.to/sol/v2/nft/compressed/read_all", walletAddress, page);
             if (!cNftData.success || cNftData.result.nfts.length === 0) break;
             allNfts.push(...cNftData.result.nfts);
+
+            // Update the NFT count here for cNFTs
+            setNftCount(prevCount => prevCount + cNftData.result.nfts.length);
+
             page++;
         }
         // Set the consolidated data to state
         setNftData(prevData => [...prevData, ...allNfts]);
         console.log("NFT Data updated:", allNfts);
+        setLoading(false);
 
     };
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-blue-200-gradient space-y-8">
+            <NftLoader loading={loading} count={nftCount} />
             <WalletComponent onWalletAddressChange={handleWalletAddressChange} />
-            <Table nfts={nftData} />
-
+            {!loading && <Table nfts={nftData} />}
         </div>
     );
+
+
+
 };
 
 export default Dashboard;
