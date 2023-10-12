@@ -11,6 +11,8 @@ const Dashboard = () => {
     const [hasDataBeenSent, setHasDataBeenSent] = useState(false);
     const [loading, setLoading] = useState(false);
     const [nftCount, setNftCount] = useState(0);
+    const [fetched, setFetched] = useState(false);
+
 
     function NftLoader({ loading, count }) {
         if (!loading) return null;
@@ -144,14 +146,19 @@ const Dashboard = () => {
         setNftData(prevData => [...prevData, ...allNfts]);
         console.log("NFT Data updated:", allNfts);
         setLoading(false);
+        setFetched(true);
 
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-blue-200-gradient space-y-8">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-blue-200-gradient space-y-8 py-4 px-2 md:px-8">
             <NftLoader loading={loading} count={nftCount} />
             <WalletComponent onWalletAddressChange={handleWalletAddressChange} />
-            {!loading && <Table nfts={nftData} />}
+            {!loading && fetched && (
+                <div className="w-full max-w-6xl mt-4 p-4 rounded-lg shadow-md bg-white">
+                    {nftData.length > 0 ? <Table nfts={nftData} /> : <p className="text-center text-xl text-gray-700">No NFTs found</p>}
+                </div>
+            )}
         </div>
     );
 
