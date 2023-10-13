@@ -9,6 +9,7 @@ const WalletComponent = ({ onWalletAddressChange }) => {
     const { publicKey } = useWallet();
     useEffect(() => {
         if (publicKey) {
+            console.log("useEffect in WalletComponent called with:", publicKey);
             const connectedWalletAddress = publicKey.toBase58();
             setWalletAddress(connectedWalletAddress);
             onWalletAddressChange(connectedWalletAddress);

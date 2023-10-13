@@ -1,83 +1,9 @@
-// import React from 'react';
-
-// const Table = ({ nfts }) => {
-//     return (
-//         <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg overflow-x-auto p-4">
-//             <table className="table">
-//                 <thead>
-//                     <tr>
-//                         <th>
-//                             <label>
-//                                 <input type="checkbox" className="checkbox" />
-//                             </label>
-//                         </th>
-//                         <th>Name</th>
-//                         <th>Job</th>
-//                         <th>Favorite Color</th>
-//                         <th>NFTs</th>
-//                         <th></th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     {/* This is just an example row. Modify as necessary */}
-//                     <tr>
-//                         <th>
-//                             <label>
-//                                 <input type="checkbox" className="checkbox" />
-//                             </label>
-//                         </th>
-//                         <td>
-//                             <div className="flex items-center space-x-3">
-//                                 <div className="avatar">
-//                                     <div className="mask mask-squircle w-12 h-12">
-//                                         <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-//                                     </div>
-//                                 </div>
-//                                 <div>
-//                                     <div className="font-bold">Hart Hagerty</div>
-//                                     <div className="text-sm opacity-50">United States</div>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                         <td>Zemlak, Daniel and Leannon</td>
-//                         <td>Purple</td>
-//                         <td>
-//                             {nfts.length > 0 ? (
-//                                 nfts.map((nft, index) => <div key={index}>{nft}</div>)
-//                             ) : (
-//                                 "No NFTs"
-//                             )}
-//                         </td>
-//                         <th>
-//                             <button className="btn btn-ghost btn-xs">details</button>
-//                         </th>
-//                     </tr>
-//                     {/* ... Add more rows as needed ... */}
-//                 </tbody>
-//                 <tfoot>
-//                     <tr>
-//                         <th></th>
-//                         <th>Name</th>
-//                         <th>Job</th>
-//                         <th>Favorite Color</th>
-//                         <th>NFTs</th>
-//                         <th></th>
-//                     </tr>
-//                 </tfoot>
-//             </table>
-//         </div>
-//     );
-// };
-
-// export default Table;
-
-
-
 
 
 
 
 import React, { useState } from 'react';
+
 
 
 const Table = ({ nfts }) => {
@@ -97,7 +23,7 @@ const Table = ({ nfts }) => {
                                 <th className='text-white text-sm'>Mint</th>
                                 <th className='text-white text-sm'>Is Compressed</th>
                                 <th className='text-white text-sm'>Predicted</th>
-                                <th className='text-white text-sm'>Confidence Score</th>
+                                <th className='text-white text-sm'>Authencity Score</th>
                                 {/* <th></th> */}
                             </tr>
                         </thead>
@@ -136,7 +62,7 @@ const Table = ({ nfts }) => {
                                         <td>{nft.is_compressed ? "Yes" : "No"}</td>
                                         <td>
                                             {nft.predicted ?
-                                                <div className={`badge gap-2 p-3 ${nft.confidence_score < 0.009 ? "badge-error" : "badge-primary"}`}>
+                                                <div className={`badge gap-2 p-3 ${nft.confidence_score < 0.009 ? "badge-error" : nft.predicted === "spam" ? "badge-warning" : "badge-success"}`}>
                                                     {nft.confidence_score < 0.009 ? "Scam" : nft.predicted}
                                                 </div>
                                                 :
@@ -144,8 +70,13 @@ const Table = ({ nfts }) => {
                                             }
                                         </td>
 
-                                        <td>{parseFloat(nft.confidence_score).toFixed(3)}%   <progress className="progress progress-secondary  w-32" value={nft.confidence_score} max="100"></progress></td>
 
+
+                                        {/* <td>{parseFloat(nft.confidence_score).toFixed(3)}%   <progress className="progress progress-secondary  w-32" value={100 - nft.confidence_score} max="100"></progress></td> */}
+                                        <td>
+                                            {nft.confidence_score !== undefined ? `${parseFloat(nft.confidence_score).toFixed(3)}%` : 'Loading...'}
+                                            <progress className="progress progress-secondary w-32" value={nft.confidence_score} max="100"></progress>
+                                        </td>
                                     </tr>
                                     {showDetailsFor === index && (
 

@@ -13,10 +13,7 @@ export const navLinks = [
     id: "Working",
     title: "Working",
   },
-  {
-    id: "ipfs",
-    title: "Ipfs",
-  },
+
 
 ];
 
