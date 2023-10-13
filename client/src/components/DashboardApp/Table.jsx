@@ -10,6 +10,17 @@ const Table = ({ nfts }) => {
 
     const [showDetailsFor, setShowDetailsFor] = useState(null);
 
+
+
+    const getNFTWeight = (nft) => {
+        if (nft.confidence_score < 0.009) return 1; // Scam
+        if (nft.predicted === "spam") return 2; // Spam
+        return 3; // Authentic
+    };
+
+
+    const sortedNfts = [...nfts].sort((a, b) => getNFTWeight(a) - getNFTWeight(b));
+
     return (
         <div className="w-full max-w-7xl rounded-xl shadow-lg overflow-x-auto bg-primary">
             <div className="max-h-[600px] overflow-y-auto">
@@ -28,7 +39,7 @@ const Table = ({ nfts }) => {
                             </tr>
                         </thead>
                         <tbody className=''>
-                            {nfts.map((nft, index) => (
+                            {sortedNfts.map((nft, index) => (
                                 <React.Fragment key={index}>
                                     <tr className={`cursor-pointer border-slate-600 ${showDetailsFor === index ? 'bg-base-200' : 'bg-primary'
                                         } text-primary-content hover:bg-base-200 rounded-lg`} onClick={() => showDetailsFor === index ? setShowDetailsFor(null) : setShowDetailsFor(index)}>
