@@ -139,7 +139,7 @@ async function fetchAllWalletNFTs(walletAddress, apiKey) {
 // Usage in your React component
 export async function fetchAndDisplayNFTs(wallet_address) {
     const walletAddress = wallet_address;
-    const apiKey = 'VM6jV28HbK8gyBKL';
+    const apiKey = '';
     let transformedNFTList;
 
     try {

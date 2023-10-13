@@ -15,15 +15,15 @@ const Table = ({ nfts }) => {
             <div className="max-h-[600px] overflow-y-auto">
                 {nfts.length > 0 && (
                     <table className="w-full table">
-                        <thead className='sticky top-0 bg-purple-300 z-10'>
+                        <thead className='sticky top-0 bg-purple-800 z-10'>
                             <tr className='border-slate-600'>
                                 <th></th>
-                                <th className='text-white text-sm'>Name</th>
-                                <th className='text-white text-sm'>Symbol</th>
-                                <th className='text-white text-sm'>Mint</th>
-                                <th className='text-white text-sm'>Is Compressed</th>
-                                <th className='text-white text-sm'>Predicted</th>
-                                <th className='text-white text-sm'>Authencity Score</th>
+                                <th className='text-white text-center  text-sm'>Name</th>
+                                <th className='text-white text-center  text-sm'>Symbol</th>
+                                <th className='text-white text-center  text-sm'>Mint</th>
+                                <th className='text-white  text-center text-sm'>Is Compressed</th>
+                                <th className='text-white  text-center text-sm'>Predicted</th>
+                                <th className='text-white  text-center text-sm'>Authencity Score</th>
                                 {/* <th></th> */}
                             </tr>
                         </thead>

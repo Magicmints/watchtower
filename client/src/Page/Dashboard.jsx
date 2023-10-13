@@ -114,6 +114,10 @@ const Dashboard = () => {
     const handleWalletAddressChange = async (walletAddress) => {
         console.log("handleWalletAddressChange called with:", walletAddress);
         if (!walletAddress) return;
+        setNftData([]);
+        setHasDataBeenSent(false);
+        setNftCount(0);
+        setFetched(false);
         setLoading(true);
         console.log("Fetching data for address:", walletAddress);
         let allNfts = [];
