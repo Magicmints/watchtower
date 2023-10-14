@@ -29,3 +29,20 @@
     100% { transform: rotate(360deg); }
   }
   
+
+  .scale-on-hover {
+    transition: transform 0.3s;  /* Adjust 0.3s to whatever duration you want */
+  }
+  
+  .scale-on-hover:hover {
+    transform: scale(2);  /* Adjust 2 to whatever scale factor you want */
+  }
+
+
+.hover-enlarge {
+    transition: transform 0.3s; /* Smooth transition */
+}
+
+.hover-enlarge:hover {
+    transform: scale(1.1); /* Enlarges the link by 10% on hover */
+}

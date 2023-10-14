@@ -4,11 +4,12 @@
 
 import React, { useState } from 'react';
 
-
+import '../../Page/m.css'
 
 const Table = ({ nfts }) => {
 
-    const [showDetailsFor, setShowDetailsFor] = useState(null);
+    const [showDetailsFor, setShowDetailsFor] = useState(0);
+
 
 
 
@@ -17,6 +18,18 @@ const Table = ({ nfts }) => {
         if (nft.predicted === "spam") return 2; // Spam
         return 3; // Authentic
     };
+
+    function getImageUri(nft) {
+        return nft.image_uri || nft.cached_image_uri || nft.animation_url || nft.cached_animation_url;
+    }
+
+    function shortenLink(link) {
+        if (link.length <= 7) {
+            return link; // return the link as is if it's already short
+        }
+        return `${link.substring(0, 5)}...${link.slice(-5)}`;
+    }
+
 
 
     const sortedNfts = [...nfts].sort((a, b) => getNFTWeight(a) - getNFTWeight(b));
@@ -51,9 +64,16 @@ const Table = ({ nfts }) => {
                                         <td>
                                             <div className="flex items-center space-x-3 p-2">
                                                 <div className="avatar">
-                                                    <div className="mask mask-squircle w-16 h-16 transform scale-125 hover:scale-150 transition-transform">
-                                                        <img src={nft.image_uri} alt={nft.name} />
+                                                    <div className="mask mask-squircle w-16 h-16 transform scale-125 scale-on-hover">
+                                                        <img src={getImageUri(nft)} alt={nft.name} />
                                                     </div>
+
+
+
+
+
+
+
 
                                                 </div>
                                                 <div>
@@ -65,10 +85,23 @@ const Table = ({ nfts }) => {
                                         {/* ----------------------------------------- */}
                                         <td>{nft.symbol || "None"}</td>
                                         <td className='badge-sm badge mt-10 text-white'>
-                                            <a href={`https://solscan.io/account/${nft.mint}`} target='_blank' rel='noopener noreferrer'>
-                                                {nft.mint}
+                                            <a
+                                                className="hover-enlarge"
+                                                href={`https://solscan.io/account/${nft.mint}`}
+                                                target='_blank'
+                                                rel='noopener noreferrer'
+                                                style={{ textDecoration: 'none', color: 'inherit' }}
+                                            >
+                                                {shortenLink(nft.mint)} ↗
                                             </a>
                                         </td>
+
+
+
+
+
+
+
 
                                         <td>{nft.is_compressed ? "Yes" : "No"}</td>
                                         <td>
