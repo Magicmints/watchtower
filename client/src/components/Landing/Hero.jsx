@@ -22,12 +22,12 @@ const Hero = () => {
 
         </div>
         <h1 className="font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100.8px] leading-[75px] w-full">
-          <span className="text-gradient"> Spam NFTs
+          <span className="text-gradient"> Scam NFTs
             <div className="absolute z-[1] w-[50%] h-[50%] rounded-full blue__gradient bottom-70" />
           </span>{" "}
         </h1>
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-          Detect spam before it hits your wallet. Your NFT guardian on Solana
+          Detect spams before it hits your wallet. Your NFT guardian on Solana
 
 
         </p>

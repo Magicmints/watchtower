@@ -37,7 +37,7 @@ export const features = [
     icon: star,
     title: "Automated Checks",
     content:
-      "Fully automated and scheduled checks identify potential spam or scam NFTs in your wallet, offering an added layer of security.",
+      "Fully automated and scheduled checks identify potential scam or spam NFTs in your wallet, offering an added layer of security.",
   },
 
   {

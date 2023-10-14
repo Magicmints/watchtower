@@ -99,7 +99,7 @@ const Dashboard = () => {
             addressParam = `address=${walletAddress}`;
         }
 
-        const API_KEY = "VM6jV28HbK8gyBKL";  // Use your API key here
+        const API_KEY = import.meta.env.VITE_API_KEY;
         const headers = new Headers();
         headers.append("x-api-key", API_KEY);
 
@@ -155,20 +155,20 @@ const Dashboard = () => {
 
     };
 
-    const sortNfts = (nfts) => {
-        const priority = {
-            "scam": 1,
-            "spam": 2,
-            "authentic": 3
-        };
+    // const sortNfts = (nfts) => {
+    //     const priority = {
+    //         "scam": 1,
+    //         "spam": 2,
+    //         "authentic": 3
+    //     };
 
-        return nfts.sort((a, b) => {
-            return priority[a.predicted] - priority[b.predicted];
-        });
-    };
+    //     return nfts.sort((a, b) => {
+    //         return priority[a.predicted] - priority[b.predicted];
+    //     });
+    // };
 
 
-    const sortedNfts = sortNfts(nftData);
+    // const sortedNfts = sortNfts(nftData);
     return (
 
 
@@ -183,7 +183,7 @@ const Dashboard = () => {
             <WalletComponent onWalletAddressChange={handleWalletAddressChange} />
             {!loading && fetched && (
                 <div className="w-full max-w-7xl mt-4 p-4 rounded-lg shadow-md bg-white">
-                    {nftData.length > 0 ? <Table nfts={sortedNfts} /> : <p className="text-center text-xl text-gray-700">No NFTs found</p>}
+                    {nftData.length > 0 ? <Table nfts={nftData} /> : <p className="text-center text-xl text-gray-700">No NFTs found</p>}
                 </div>
             )}
         </div>
