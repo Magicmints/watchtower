@@ -11,7 +11,7 @@ const Home = () => {
         <NavBar />
         <Hero />
         <Working />
-        {/* <Feedback /> */}
+
         <Zk />
         <Vcheck />
         <Footer />

@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import WalletComponent from '../components/DashboardApp/WalletComponent';
 import Table from '../components/DashboardApp/Table';
+
 import './m.css'
 const Dashboard = () => {
     const [nftData, setNftData] = useState([]);
@@ -12,6 +13,8 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(false);
     const [nftCount, setNftCount] = useState(0);
     const [fetched, setFetched] = useState(false);
+    const [hasStartedFetching, setHasStartedFetching] = useState(false);
+
 
 
     function NftLoader({ loading, count }) {
@@ -119,6 +122,7 @@ const Dashboard = () => {
         setNftCount(0);
         setFetched(false);
         setLoading(true);
+        setHasStartedFetching(true);
         console.log("Fetching data for address:", walletAddress);
         let allNfts = [];
         let page = 1;
@@ -155,20 +159,6 @@ const Dashboard = () => {
 
     };
 
-    // const sortNfts = (nfts) => {
-    //     const priority = {
-    //         "scam": 1,
-    //         "spam": 2,
-    //         "authentic": 3
-    //     };
-
-    //     return nfts.sort((a, b) => {
-    //         return priority[a.predicted] - priority[b.predicted];
-    //     });
-    // };
-
-
-    // const sortedNfts = sortNfts(nftData);
     return (
 
 
@@ -180,7 +170,8 @@ const Dashboard = () => {
             }}
         >
             <NftLoader loading={loading} count={nftCount} />
-            <WalletComponent onWalletAddressChange={handleWalletAddressChange} />
+            <WalletComponent onWalletAddressChange={handleWalletAddressChange} hasStartedFetching={hasStartedFetching} />
+
             {!loading && fetched && (
                 <div className="w-full max-w-7xl mt-4 p-4 rounded-lg shadow-md bg-white">
                     {nftData.length > 0 ? <Table nfts={nftData} /> : <p className="text-center text-xl text-gray-700">No NFTs found</p>}
