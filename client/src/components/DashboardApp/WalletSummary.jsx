@@ -6,10 +6,11 @@ const NftSummaryComponent = ({ totalNfts, spamCount, scamCount, authenticCount }
             <h2 className="text-white text-xl mb-4">Total NFTs Found: {totalNfts}</h2>
             <div className="flex justify-between space-x-4">
                 <div className="bg-red-600 text-white px-4 py-1.5 rounded-full font-semibold tracking-wider shadow-sm hover:shadow-md transition-shadow duration-300">
-                    Spam: {spamCount}
+
+                    Scam: {scamCount}
                 </div>
                 <div className="bg-yellow-600 text-white px-4 py-1.5 rounded-full font-semibold tracking-wider shadow-sm hover:shadow-md transition-shadow duration-300">
-                    Scam: {scamCount}
+                    Spam: {spamCount}
                 </div>
                 <div className="bg-green-600 text-white px-4 py-1.5 rounded-full font-semibold tracking-wider shadow-sm hover:shadow-md transition-shadow duration-300">
                     Authentic: {authenticCount}
