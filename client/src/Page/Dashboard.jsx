@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import WalletComponent from '../components/DashboardApp/WalletComponent';
 import Table from '../components/DashboardApp/Table';
-
+import NftSummaryComponent from '../components/DashboardApp/WalletSummary'
 import './m.css'
 const Dashboard = () => {
     const [nftData, setNftData] = useState([]);
@@ -15,6 +15,30 @@ const Dashboard = () => {
     const [fetched, setFetched] = useState(false);
     const [hasStartedFetching, setHasStartedFetching] = useState(false);
 
+
+    const computeNftCategoriesCount = () => {
+        let spamCount = 0;
+        let scamCount = 0;
+        let authenticCount = 0;
+
+        nftData.forEach(nft => {
+            if (nft.predicted) {
+                if (nft.confidence_score < 0.009) {
+                    scamCount++;
+                } else if (nft.predicted === "spam") {
+                    spamCount++;
+                } else {
+                    authenticCount++;
+                }
+            }
+        });
+
+        return {
+            spamCount,
+            scamCount,
+            authenticCount
+        };
+    }
 
 
     function NftLoader({ loading, count }) {
@@ -159,6 +183,9 @@ const Dashboard = () => {
 
     };
 
+
+    const { spamCount, scamCount, authenticCount } = computeNftCategoriesCount();
+
     return (
 
 
@@ -173,9 +200,17 @@ const Dashboard = () => {
             <WalletComponent onWalletAddressChange={handleWalletAddressChange} hasStartedFetching={hasStartedFetching} />
 
             {!loading && fetched && (
-                <div className="w-full max-w-7xl mt-4 p-4 rounded-lg shadow-md bg-white">
-                    {nftData.length > 0 ? <Table nfts={nftData} /> : <p className="text-center text-xl text-gray-700">No NFTs found</p>}
-                </div>
+                <>
+                    <NftSummaryComponent
+                        totalNfts={nftData.length}
+                        spamCount={spamCount}
+                        scamCount={scamCount}
+                        authenticCount={authenticCount}
+                    />
+                    <div className="w-full max-w-7xl mt-4 p-4 rounded-lg shadow-md bg-white">
+                        {nftData.length > 0 ? <Table nfts={nftData} /> : <p className="text-center text-xl text-gray-700">No NFTs found</p>}
+                    </div>
+                </>
             )}
         </div>
     );

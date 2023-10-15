@@ -67,14 +67,6 @@ const Table = ({ nfts }) => {
                                                     <div className="mask mask-squircle w-16 h-16 transform scale-125 scale-on-hover">
                                                         <img src={getImageUri(nft)} alt={nft.name} />
                                                     </div>
-
-
-
-
-
-
-
-
                                                 </div>
                                                 <div>
                                                     <div className="font-bold">{nft.name}</div>
