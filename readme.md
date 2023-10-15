@@ -2,11 +2,18 @@
 
 ## AI/LLM-Enhanced NFT Scam Detection System for Solana
 
-![WatchTower Logo](http://res.cloudinary.com/dgvnuwspr/image/upload/v1696002668/Grants%20Dashboard/recZI3h9meXVRsYHL.png)
+![WatchTower Logo](https://res.cloudinary.com/dpcdw8cnc/image/upload/v1697388063/WatchTower_logo_dwd1zd.jpg)
 
-> WatchTower is a sophisticated AI/LLM-enhanced NFT scam detection system for the Solana blockchain. The project aims to actively scan user wallets for questionable tokens, recommend burns, and meticulously log on-chain activities to safeguard users from potential scams and thefts.
+> WatchTower stands as the first layer of user security on Solana. 
+Our mission? To shield every Solana user from potential hacks and scams. 
+
+At its core, WatchTower analyses user wallets, pinpointing scam, spam, or authentic NFTs, and provides real-time alerts along with a confidence score. This is made possible by our bespoke ML model, meticulously tailored to Solana NFT standards, boasting a staggering 99.8% accuracy.
+
+As we look ahead, our roadmap is brimming with innovation. Expect a diverse suite of tools, from chrome extensions and batch processing APIs to zk relayers and more. Our commitment remains steadfast: ensuring users have a seamless and secure journey on Solana.
 
 ---
+
+![Wallet Analytics](https://res.cloudinary.com/dpcdw8cnc/image/upload/v1697272104/Screenshot_2023-10-14_at_1.09.26_AM_vkyvqy.png)
 
 ### Table of Contents
 
@@ -25,7 +32,7 @@
 ### Technologies Used 🛠️
 
 - **Frontend**: Next.js
-- **Backend**: AWS services for API, EC2, and various AI/ML services
+- **Backend**: AWS services for API, EC2, and various AI/ML services , AWS api gateway , lambda scaling solutions.
 - **Data Retrieval**: Shyft API
 - **Algorithms**: BERT, RandomForest, and other machine learning algorithms
 
@@ -77,8 +84,8 @@
 ### Limitations 🚧
 
 - The system currently operates on a free tier and might be slower than expected.
-- In need of additional training data for algorithmic improvement.
-- Accuracy rate currently stands at 99.7%.
+- In need of additional training data for algorithmic improvement (optimised an trained on solana dataset)
+- Accuracy rate currently stands at 99.8%.
 
 ---
 
